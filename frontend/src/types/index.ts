@@ -29,9 +29,9 @@ export interface Me {
   coverUrl?: string;
   bio: string;
   stats: { connections: number; pending: number; events: number; unread: number };
-  experience: { role: string; org: string; from: string; to: string }[];
-  interests: string[];
-  preferences: { msgs: boolean; mentions: boolean; events: boolean; weekly: boolean; marketing: boolean };
+  experience?: { role: string; org: string; from: string; to: string }[];
+  interests?: string[];
+  preferences?: { msgs: boolean; mentions: boolean; events: boolean; weekly: boolean; marketing: boolean };
 }
 
 export interface ConversationFull {
