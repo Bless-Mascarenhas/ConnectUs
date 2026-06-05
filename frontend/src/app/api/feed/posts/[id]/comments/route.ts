@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   const post = await prisma.post.findUnique({ where: { id: params.id } });
   if (!post) return NextResponse.json({ error: "post not found" }, { status: 404 });
 
-  const comments = (post.comments || []) as Record<string, unknown>[];
+  const comments = (post.comments || []) as any[];
   const newComment = {
     id: "c" + Date.now(),
     authorId: userId,
