@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ConnectUs — Modern Minimal palette (sage accent) */
+@layer base {
+  :root {
+    /* warm off-white canvas */
+    --canvas: 40 33% 97%;       /* #FAFAF9 */
+    --surface: 0 0% 100%;
+    --ink: 0 0% 4%;             /* #0A0A0A */
+    --muted: 30 8% 94%;
+    --muted-fg: 30 4% 38%;
+    --line: 30 10% 88%;
+
+    --accent: 119 16% 42%;      /* sage #5B7C5A */
+    --accent-soft: 119 18% 92%;
+    --accent-fg: 0 0% 100%;
+
+    --success: 142 38% 42%;
+    --warning: 32 80% 52%;
+    --danger: 4 70% 52%;
+
+    --radius: 14px;
+  }
+
+  .dark {
+    --canvas: 0 0% 4%;          /* near-black */
+    --surface: 0 0% 7%;
+    --ink: 30 10% 96%;
+    --muted: 0 0% 12%;
+    --muted-fg: 30 5% 64%;
+    --line: 0 0% 16%;
+
+    --accent: 119 22% 58%;
+    --accent-soft: 119 14% 14%;
+    --accent-fg: 0 0% 8%;
+
+    --success: 142 38% 56%;
+    --warning: 32 80% 60%;
+    --danger: 4 76% 62%;
+  }
+
+  * { @apply border-line; }
+  html, body { @apply h-full; }
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  /* Custom thin scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--line));
+    border-radius: 99px;
+    border: 3px solid hsl(var(--canvas));
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-fg) / 0.5); }
+
+  /* Selection */
+  ::selection { background: hsl(var(--accent) / 0.25); color: hsl(var(--ink)); }
+}
+
+@layer components {
+  .text-display {
+    @apply font-serif tracking-[-0.02em] leading-[1.05];
+    font-feature-settings: "ss01";
+  }
+  .kbd {
+    @apply inline-flex items-center justify-center min-w-[1.5rem] h-5 px-1.5 rounded-md
+           text-[10px] font-medium text-muted-foreground
+           bg-muted border border-line/80 shadow-[inset_0_-1px_0_hsl(var(--line))];
+  }
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted) / 0.4) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer rounded-md;
+  }
+  .hover-lift {
+    @apply transition-all duration-200 ease-out;
+  }
+  .hover-lift:hover {
+    @apply -translate-y-px shadow-[0_8px_24px_-12px_hsl(var(--ink)/0.15)];
+  }
+  .glass {
+    @apply bg-surface/70 backdrop-blur-xl border border-line/70;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:4000/api/health)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(npx tsc *)",
+      "Bash(cd \"c:/Users/Rohit Gonsalves/Desktop/First-Year/Websites/ConnectUs\" && rm -rf .git && echo \".git folder deleted\")",
+      "Read(//c/Users/Rohit Gonsalves/Desktop/First-Year/Websites/**)",
+      "Bash(rm -rf ConnectUs/.git)",
+      "Bash(Copy-Item \"c:\\\\Users\\\\Rohit Gonsalves\\\\Desktop\\\\First-Year\\\\Websites\\\\ConnectUs\\\\backend\\\\.env.example\" \"c:\\\\Users\\\\Rohit Gonsalves\\\\Desktop\\\\First-Year\\\\Websites\\\\ConnectUs\\\\backend\\\\.env\")",
+      "Bash(Copy-Item \"c:\\\\Users\\\\Rohit Gonsalves\\\\Desktop\\\\First-Year\\\\Websites\\\\ConnectUs\\\\frontend\\\\.env.example\" \"c:\\\\Users\\\\Rohit Gonsalves\\\\Desktop\\\\First-Year\\\\Websites\\\\ConnectUs\\\\frontend\\\\.env.local\")",
+      "Read(//tmp/**)",
+      "PowerShell(gh --version)",
+      "PowerShell(winget install --id GitHub.cli --silent --accept-package-agreements --accept-source-agreements)",
+      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\GitHub CLI\"; gh auth login --web --git-protocol https)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Rohit Gonsalves\\Desktop\\First-Year\\Websites\\ConnectUs\\.git",
+      "C:\\Users\\Rohit Gonsalves\\Desktop\\First-Year\\Websites\\ConnectUs\\.git"
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Alumnus {
+  id            String         @id
+  name          String
+  avatar        String
+  coverColor    String
+  role          String
+  company       String
+  industry      String
+  location      String
+  gradYear      Int
+  major         String
+  university    String
+  bio           String
+  expertise     Json
+  workHistory   Json
+  education     Json
+  available     Boolean
+  online        Boolean
+  conversations Conversation[]
+  hostedEvents  Event[]        @relation("EventHost")
+  mentorProfile MentorProfile?
+}
+
+model Student {
+  id         String @id
+  name       String
+  avatar     String
+  major      String
+  gradYear   Int
+  university String
+  interests  Json
+}
+
+model User {
+  id          String       @id
+  name        String
+  avatar      String
+  role        String
+  major       String
+  gradYear    Int
+  university  String
+  coverUrl    String?
+  bio         String
+  stats       Json
+  experience  Json         @default("[]")
+  interests   Json         @default("[]")
+  preferences Json         @default("{\"msgs\":true,\"mentions\":true,\"events\":true,\"weekly\":false,\"marketing\":false}")
+  connections Connection[]
+}
+
+model Conversation {
+  id            String    @id
+  userId        String?   // Owner of this conversation (for authorization)
+  participantId String
+  participant   Alumnus   @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  lastMessageAt DateTime
+  unread        Int
+  messages      Message[]
+}
+
+model Message {
+  id             String       @id
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  body           String
+  createdAt      DateTime
+  read           Boolean
+}
+
+model MentorProfile {
+  alumnusId         String    @id
+  alumnus           Alumnus   @relation(fields: [alumnusId], references: [id], onDelete: Cascade)
+  hourlyPrice       Float?
+  rating            Float
+  sessionsCompleted Int
+  availability      Json
+  bookings          Booking[]
+}
+
+model Booking {
+  id        String        @id
+  userId    String?       // Who made this booking (for authorization)
+  mentorId  String
+  mentor    MentorProfile @relation(fields: [mentorId], references: [alumnusId], onDelete: Cascade)
+  slot      DateTime
+  goal      String
+  status    String
+  createdAt DateTime
+}
+
+model Event {
+  id          String   @id
+  title       String
+  description String
+  date        DateTime
+  endDate     DateTime
+  location    String
+  virtual     Boolean
+  hostId      String
+  host        Alumnus  @relation("EventHost", fields: [hostId], references: [id], onDelete: Cascade)
+  cover       String
+  attendees   String[]
+  going       Boolean
+}
+
+model Post {
+  id        String   @id
+  authorId  String
+  content   String
+  image     String?
+  createdAt DateTime
+  reactions Json
+  comments  Json
+}
+
+model Connection {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  alumniId  String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, alumniId])
+}
