@@ -69,3 +69,55 @@ export interface PostFull {
   reactions: { emoji: string; count: number }[];
   comments: { id: string; authorId: string; body: string; createdAt: string }[];
 }
+export interface Student {
+  id: string;
+  name: string;
+  avatar: string;
+  major: string;
+  gradYear: number;
+  university: string;
+  interests: string[];
+}
+
+export interface Message {
+  id: string;
+  conversationId: string;
+  senderId: string;
+  body: string;
+  createdAt: string;
+  read: boolean;
+}
+
+export interface Conversation {
+  id: string;
+  participantId: string;
+  lastMessageAt: string;
+  unread: number;
+}
+
+export interface Mentor {
+  alumnusId: string;
+  hourlyPrice: number | null;
+  rating: number;
+  sessionsCompleted: number;
+  availability: string[];
+}
+
+export interface MentorshipBooking {
+  id: string;
+  mentorId: string;
+  slot: string;
+  goal: string;
+  status: "upcoming" | "completed" | "cancelled";
+  createdAt: string;
+}
+
+export interface Post {
+  id: string;
+  authorId: string;
+  content: string;
+  image?: string;
+  createdAt: string;
+  reactions: { emoji: string; count: number }[];
+  comments: { id: string; authorId: string; body: string; createdAt: string }[];
+}

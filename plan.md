@@ -328,7 +328,7 @@ GitHub (main branch)
 - [x] Migrate every Express route from `backend/src/index.ts` to `frontend/src/app/api/**/route.ts`
 - [x] Move Prisma client to the frontend project (or shared package)
 - [x] Remove dependency on separate `localhost:4000` in production (`NEXT_PUBLIC_API_URL` → same origin or relative `/api`)
-- [ ] Push repository to GitHub
+- [x] Push repository to GitHub
 - [ ] Import project into Vercel
 - [ ] Add Environment Variables to Vercel and hit Deploy
 - [ ] Connect GitHub repo to Vercel
