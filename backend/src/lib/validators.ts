@@ -33,13 +33,6 @@ export const sendMessageSchema = z.object({
   body:           safeString(5000),
 });
 
-// ─── POST /api/mentorship/book ──────────────────────────────────────
-export const bookMentorSchema = z.object({
-  mentorId: safeString(50),
-  slot:     z.string().refine((s) => !isNaN(Date.parse(s)), { message: "Invalid date" }),
-  goal:     z.string().trim().max(1000).optional(),
-});
-
 // ─── POST /api/events ───────────────────────────────────────────────
 export const createEventSchema = z.object({
   title:       safeString(200),

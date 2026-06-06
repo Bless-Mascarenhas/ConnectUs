@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Users, Bell, Calendar, MessageSquare, ArrowRight, Sparkles, GraduationCap,
+  Users, Bell, Calendar, MessageSquare, ArrowRight, Sparkles,
   TrendingUp, Plus, Search,
 } from "lucide-react";
 import { PageHeader } from "@/components/features/page-header";
@@ -201,7 +201,7 @@ export default function DashboardPage() {
         <h2 className="text-display text-xl text-ink mb-3">Quick actions</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {[
-            { href: "/mentorship", icon: GraduationCap, label: "Book a mentor", desc: "Reserve a 1:1 session" },
+
             { href: "/alumni", icon: Search, label: "Find alumni", desc: "Filter by year, role, expertise" },
             { href: "/events", icon: Calendar, label: "Browse events", desc: "Mixers, panels, workshops" },
             { href: "/profile", icon: TrendingUp, label: "Update profile", desc: "Make recommendations sharper" },

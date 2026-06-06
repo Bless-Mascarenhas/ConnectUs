@@ -27,7 +27,7 @@ model Alumnus {
   online        Boolean
   conversations Conversation[]
   hostedEvents  Event[]        @relation("EventHost")
-  mentorProfile MentorProfile?
+
 }
 
 model Student {
@@ -77,26 +77,6 @@ model Message {
   read           Boolean
 }
 
-model MentorProfile {
-  alumnusId         String    @id
-  alumnus           Alumnus   @relation(fields: [alumnusId], references: [id], onDelete: Cascade)
-  hourlyPrice       Float?
-  rating            Float
-  sessionsCompleted Int
-  availability      Json
-  bookings          Booking[]
-}
-
-model Booking {
-  id        String        @id
-  userId    String?       // Who made this booking (for authorization)
-  mentorId  String
-  mentor    MentorProfile @relation(fields: [mentorId], references: [alumnusId], onDelete: Cascade)
-  slot      DateTime
-  goal      String
-  status    String
-  createdAt DateTime
-}
 
 model Event {
   id          String   @id

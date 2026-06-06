@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  LayoutGrid, Users, MessageSquare, GraduationCap, Calendar, Sparkles,
+  LayoutGrid, Users, MessageSquare, Calendar, Sparkles,
   User, Settings, ChevronLeft, Search, PanelLeftClose, Menu, X,
 } from "lucide-react";
 import { Logo } from "./logo";
@@ -19,7 +19,6 @@ const PRIMARY = [
   { href: "/", icon: LayoutGrid, label: "Dashboard" },
   { href: "/alumni", icon: Users, label: "Alumni" },
   { href: "/messages", icon: MessageSquare, label: "Messages" },
-  { href: "/mentorship", icon: GraduationCap, label: "Mentorship" },
   { href: "/events", icon: Calendar, label: "Events" },
   { href: "/feed", icon: Sparkles, label: "Feed" },
 ];

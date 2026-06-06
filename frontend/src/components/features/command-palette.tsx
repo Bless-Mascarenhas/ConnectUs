@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  LayoutGrid, Users, MessageSquare, GraduationCap, Calendar, Sparkles,
+  LayoutGrid, Users, MessageSquare, Calendar, Sparkles,
   User, Settings, Search, CornerDownLeft, ArrowUp, ArrowDown,
 } from "lucide-react";
 import { cn, EASE } from "@/lib/utils";
@@ -37,7 +37,7 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
       { id: "go-dashboard", label: "Go to Dashboard", group: "Navigate", icon: LayoutGrid, action: go("/"), shortcut: "G D" },
       { id: "go-alumni", label: "Go to Alumni Directory", group: "Navigate", icon: Users, action: go("/alumni"), shortcut: "G A" },
       { id: "go-messages", label: "Go to Messages", group: "Navigate", icon: MessageSquare, action: go("/messages"), shortcut: "G M" },
-      { id: "go-mentorship", label: "Go to Mentorship", group: "Navigate", icon: GraduationCap, action: go("/mentorship") },
+
       { id: "go-events", label: "Go to Events", group: "Navigate", icon: Calendar, action: go("/events") },
       { id: "go-feed", label: "Go to Community Feed", group: "Navigate", icon: Sparkles, action: go("/feed") },
       { id: "go-profile", label: "Open your profile", group: "Account", icon: User, action: go("/profile") },

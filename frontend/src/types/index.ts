@@ -95,22 +95,6 @@ export interface Conversation {
   unread: number;
 }
 
-export interface Mentor {
-  alumnusId: string;
-  hourlyPrice: number | null;
-  rating: number;
-  sessionsCompleted: number;
-  availability: string[];
-}
-
-export interface MentorshipBooking {
-  id: string;
-  mentorId: string;
-  slot: string;
-  goal: string;
-  status: "upcoming" | "completed" | "cancelled";
-  createdAt: string;
-}
 
 export interface Post {
   id: string;

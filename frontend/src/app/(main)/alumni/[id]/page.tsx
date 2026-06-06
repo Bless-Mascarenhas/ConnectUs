@@ -103,11 +103,7 @@ export default function AlumnusProfile() {
                 <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-muted-foreground">
                   <span className="inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> {alumnus.location}</span>
                   <span className="inline-flex items-center gap-1"><GraduationCap className="h-3 w-3" /> {alumnus.university}, '{String(alumnus.gradYear).slice(2)}</span>
-                  {alumnus.available && (
-                    <Badge variant="accent" className="gap-1">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-soft" /> Open to mentorship
-                    </Badge>
-                  )}
+
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2">
@@ -117,9 +113,7 @@ export default function AlumnusProfile() {
                 <Button variant="outline" asChild>
                   <Link href="/messages"><MessageSquare className="h-4 w-4" />Message</Link>
                 </Button>
-                <Button variant="accent" asChild>
-                  <Link href="/mentorship"><Sparkles className="h-4 w-4" />Book mentorship</Link>
-                </Button>
+
               </div>
             </div>
           </div>

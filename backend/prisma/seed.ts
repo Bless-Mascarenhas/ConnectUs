@@ -2,11 +2,9 @@ import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import {
   alumni,
-  bookings,
   conversations,
   events,
   me,
-  mentors,
   messages,
   posts,
   students,
@@ -17,8 +15,7 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.message.deleteMany();
   await prisma.conversation.deleteMany();
-  await prisma.booking.deleteMany();
-  await prisma.mentorProfile.deleteMany();
+
   await prisma.post.deleteMany();
   await prisma.event.deleteMany();
   await prisma.student.deleteMany();
@@ -93,26 +90,6 @@ async function main() {
     })),
   });
 
-  await prisma.mentorProfile.createMany({
-    data: mentors.map((m) => ({
-      alumnusId: m.alumnusId,
-      hourlyPrice: m.hourlyPrice,
-      rating: m.rating,
-      sessionsCompleted: m.sessionsCompleted,
-      availability: m.availability,
-    })),
-  });
-
-  await prisma.booking.createMany({
-    data: bookings.map((b) => ({
-      id: b.id,
-      mentorId: b.mentorId,
-      slot: new Date(b.slot),
-      goal: b.goal,
-      status: b.status,
-      createdAt: new Date(b.createdAt),
-    })),
-  });
 
   await prisma.event.createMany({
     data: events.map((e) => ({
@@ -147,7 +124,7 @@ async function main() {
     students: students.length,
     conversations: conversations.length,
     messages: messages.length,
-    mentors: mentors.length,
+
     events: events.length,
     posts: posts.length,
   });

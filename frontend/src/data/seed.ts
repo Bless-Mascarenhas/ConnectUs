@@ -3,8 +3,6 @@ import type {
   Conversation,
   EventItem,
   Me,
-  Mentor,
-  MentorshipBooking,
   Message,
   Post,
   Student,
@@ -171,23 +169,7 @@ export const messages: Message[] = conversations.flatMap((c, ci) => {
   ];
 });
 
-export const mentors: Mentor[] = alumni.slice(0, 18).map((a, i) => ({
-  alumnusId: a.id,
-  hourlyPrice: i % 4 === 0 ? null : 40 + (i % 5) * 25,
-  rating: 4.3 + ((i * 13) % 7) / 10,
-  sessionsCompleted: 8 + ((i * 17) % 80),
-  availability: [
-    ahead(1 + (i % 3)).replace(/T.*/, "T15:00:00Z"),
-    ahead(2 + (i % 4)).replace(/T.*/, "T17:30:00Z"),
-    ahead(4 + (i % 5)).replace(/T.*/, "T14:00:00Z"),
-    ahead(7 + (i % 4)).replace(/T.*/, "T20:00:00Z"),
-  ],
-}));
 
-export const bookings: MentorshipBooking[] = [
-  { id: "b1", mentorId: "a2", slot: ahead(3).replace(/T.*/, "T17:30:00Z"), goal: "Review my product internship resume.", status: "upcoming", createdAt: ago(60 * 24) },
-  { id: "b2", mentorId: "a5", slot: new Date(now - 86_400_000 * 5).toISOString(), goal: "Mock system design interview.", status: "completed", createdAt: ago(60 * 24 * 6) },
-];
 
 export const events: EventItem[] = Array.from({ length: 9 }, (_, i) => {
   const future = i < 6;

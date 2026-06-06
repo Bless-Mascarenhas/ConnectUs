@@ -7,7 +7,7 @@ import { authenticate } from "./lib/auth";
 import { mapAlumnus, mapMe, mapPost } from "./lib/mappers";
 import { generalLimiter, writeLimiter } from "./lib/rateLimiter";
 import {
-  updateProfileSchema, sendMessageSchema, bookMentorSchema,
+  updateProfileSchema, sendMessageSchema,
   createEventSchema, createPostSchema, createCommentSchema, reactSchema,
 } from "./lib/validators";
 
@@ -285,68 +285,6 @@ app.post("/api/messages", writeLimiter, async (req, res) => {
   });
 });
 
-app.get("/api/mentorship/mentors", async (_req, res) => {
-  const rows = await prisma.mentorProfile.findMany({ include: { alumnus: true } });
-  res.json(
-    rows.map((m) => ({
-      alumnusId: m.alumnusId,
-      hourlyPrice: m.hourlyPrice,
-      rating: m.rating,
-      sessionsCompleted: m.sessionsCompleted,
-      availability: m.availability as string[],
-      alumnus: mapAlumnus(m.alumnus),
-    }))
-  );
-});
-
-app.get("/api/mentorship/bookings", async (req, res) => {
-  // Authorization: only return bookings belonging to this user
-  const userId = uid(req);
-  const rows = await prisma.booking.findMany({
-    where: { userId },
-    include: { mentor: { include: { alumnus: true } } },
-    orderBy: { createdAt: "desc" },
-  });
-  res.json(
-    rows.map((b) => ({
-      id: b.id,
-      mentorId: b.mentorId,
-      slot: b.slot.toISOString(),
-      goal: b.goal,
-      status: b.status,
-      createdAt: b.createdAt.toISOString(),
-      mentor: mapAlumnus(b.mentor.alumnus),
-    }))
-  );
-});
-
-app.post("/api/mentorship/book", writeLimiter, async (req, res) => {
-  const result = bookMentorSchema.safeParse(req.body);
-  if (!result.success) {
-    return res.status(400).json({ error: "Validation failed", details: result.error.flatten().fieldErrors });
-  }
-  const { mentorId, slot, goal } = result.data;
-  const userId = uid(req);
-  const booking = await prisma.booking.create({
-    data: {
-      id: `b${Date.now()}`,
-      userId,
-      mentorId,
-      slot: new Date(slot),
-      goal: goal ?? "",
-      status: "upcoming",
-      createdAt: new Date(),
-    },
-  });
-  res.json({
-    id: booking.id,
-    mentorId: booking.mentorId,
-    slot: booking.slot.toISOString(),
-    goal: booking.goal,
-    status: booking.status,
-    createdAt: booking.createdAt.toISOString(),
-  });
-});
 
 app.get("/api/events", async (req, res) => {
   const userId = uid(req);
