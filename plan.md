@@ -313,7 +313,7 @@ Still missing or partial:
 
 **Goal:** Push to `main` → CI passes → live on your domain. One Next.js app on Vercel.
 
-**Status:** Not started
+**Status:** Done
 
 **Architecture:**
 
@@ -329,18 +329,18 @@ GitHub (main branch)
 - [x] Move Prisma client to the frontend project (or shared package)
 - [x] Remove dependency on separate `localhost:4000` in production (`NEXT_PUBLIC_API_URL` → same origin or relative `/api`)
 - [x] Push repository to GitHub
-- [ ] Import project into Vercel
-- [ ] Add Environment Variables to Vercel and hit Deploy
-- [ ] Connect GitHub repo to Vercel
-- [ ] Set all environment variables in Vercel dashboard
-- [ ] Create `.github/workflows/ci.yml`:
-  - [ ] `npm ci`
-  - [ ] `next lint`
-  - [ ] `tsc --noEmit`
-  - [ ] `npx prisma validate`
-- [ ] Enable Vercel preview deployments for PRs
-- [ ] Add `npx prisma migrate deploy` to Vercel build command
-- [ ] Add your registered custom domain in Vercel (SSL automatic)
+- [x] Import project into Vercel
+- [x] Add Environment Variables to Vercel and hit Deploy
+- [x] Connect GitHub repo to Vercel
+- [x] Set all environment variables in Vercel dashboard
+- [x] Create `.github/workflows/ci.yml`:
+  - [x] `npm ci`
+  - [x] `next lint`
+  - [x] `tsc --noEmit`
+  - [x] `npx prisma validate`
+- [x] Enable Vercel preview deployments for PRs
+- [x] Add `npx prisma migrate deploy` to Vercel build command
+- [x] Add your registered custom domain in Vercel (SSL automatic)
 
 **Done when:** Push to `main` → CI green → site live at your domain within ~2 minutes.
 

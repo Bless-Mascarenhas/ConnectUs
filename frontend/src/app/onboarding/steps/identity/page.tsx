@@ -85,6 +85,12 @@ export default function IdentityStep() {
           verificationDocUrl: docUrl,
         }),
       });
+
+      // Fire and forget verification process in the background
+      api("/api/users/me/verify-document", { method: "POST" }).catch((err) =>
+        console.error("Background verification error:", err)
+      );
+
       router.push("/onboarding/steps/bio");
     } catch {
       setErrors({ form: "Failed to save. Please try again." });
