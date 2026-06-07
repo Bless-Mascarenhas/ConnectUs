@@ -58,3 +58,25 @@ export const createCommentSchema = z.object({
 export const reactSchema = z.object({
   emoji: z.string().min(1).max(10),
 });
+
+// ─── PATCH /api/users/me/onboarding ─────────────────────────────────
+export const onboardingStepSchema = z.object({
+  name:               safeString(100).optional(),
+  university:         safeString(200).optional(),
+  verificationDocUrl: z.string().url().max(500).optional(),
+  bio:                z.string().trim().max(2000).optional(),
+  major:              safeString(100).optional(),
+  gradYear:           z.number().int().min(2000).max(2035).optional(),
+  interests:          z.array(z.string().trim().max(100)).max(30).optional(),
+  username:           z.string().trim().min(3).max(20)
+                        .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores")
+                        .optional(),
+  avatar:             z.string().url().max(500).optional(),
+}).strict();
+
+// ─── GET /api/users/check-username ──────────────────────────────────
+export const checkUsernameSchema = z.object({
+  username: z.string().trim().min(3).max(20)
+    .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
+});
+

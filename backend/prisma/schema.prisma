@@ -55,6 +55,10 @@ model User {
   interests   Json         @default("[]")
   preferences Json         @default("{\"msgs\":true,\"mentions\":true,\"events\":true,\"weekly\":false,\"marketing\":false}")
   connections Connection[]
+  username             String?  @unique
+  onboardingComplete   Boolean  @default(false)
+  verificationDocUrl   String?
+  verificationStatus   String   @default("pending")
 }
 
 model Conversation {

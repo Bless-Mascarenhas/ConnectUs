@@ -38,6 +38,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
         setLoading(false);
         return;
       }
+      router.push("/onboarding");
     } else {
       const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
       if (signInError) {
@@ -45,9 +46,9 @@ export function AuthForm({ mode }: { mode: Mode }) {
         setLoading(false);
         return;
       }
+      router.push("/");
     }
 
-    router.push("/");
     router.refresh();
   }
 

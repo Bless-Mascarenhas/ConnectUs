@@ -38,6 +38,8 @@ export function mapMe(row: User): Me {
     experience: row.experience as Me["experience"],
     interests: row.interests as Me["interests"],
     preferences: row.preferences as Me["preferences"],
+    username: row.username || undefined,
+    onboardingComplete: row.onboardingComplete,
   };
 }
 

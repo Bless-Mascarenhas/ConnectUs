@@ -33,6 +33,10 @@ async function main() {
       university: me.university,
       bio: me.bio,
       stats: me.stats,
+      username: "avery_chen",
+      onboardingComplete: true,
+      verificationDocUrl: "https://api.dicebear.com/7.x/notionists/svg?seed=VerificationDoc",
+      verificationStatus: "approved",
     },
   });
 

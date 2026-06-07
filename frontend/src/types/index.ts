@@ -32,6 +32,8 @@ export interface Me {
   experience?: { role: string; org: string; from: string; to: string }[];
   interests?: string[];
   preferences?: { msgs: boolean; mentions: boolean; events: boolean; weekly: boolean; marketing: boolean };
+  username?: string;
+  onboardingComplete?: boolean;
 }
 
 export interface ConversationFull {
