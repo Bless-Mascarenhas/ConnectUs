@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   ArrowLeft, MapPin, Briefcase, GraduationCap, MessageSquare, UserPlus,
@@ -23,6 +23,8 @@ export default function AlumnusProfile() {
   const [loading, setLoading] = React.useState(true);
   const [connected, setConnected] = React.useState(false);
   const [connecting, setConnecting] = React.useState(false);
+  const [messaging, setMessaging] = React.useState(false);
+  const router = useRouter();
 
   React.useEffect(() => {
     Promise.all([
@@ -47,6 +49,22 @@ export default function AlumnusProfile() {
       }
     } finally {
       setConnecting(false);
+    }
+  };
+
+  const startConversation = async () => {
+    if (!id) return;
+    setMessaging(true);
+    try {
+      const convo = await api<{ id: string }>("/api/messages/conversations", {
+        method: "POST",
+        body: JSON.stringify({ participantId: id }),
+      });
+      router.push(`/messages?convo=${convo.id}`);
+    } catch (e) {
+      console.error("Failed to start conversation", e);
+    } finally {
+      setMessaging(false);
     }
   };
 
@@ -110,8 +128,8 @@ export default function AlumnusProfile() {
                 <Button variant={connected ? "subtle" : "primary"} onClick={toggleConnect} disabled={connecting}>
                   {connected ? <><CheckCircle2 className="h-4 w-4" />Connected</> : <><UserPlus className="h-4 w-4" />Connect</>}
                 </Button>
-                <Button variant="outline" asChild>
-                  <Link href="/messages"><MessageSquare className="h-4 w-4" />Message</Link>
+                <Button variant="outline" onClick={startConversation} disabled={messaging}>
+                  <MessageSquare className="h-4 w-4" />{messaging ? "Starting..." : "Message"}
                 </Button>
 
               </div>

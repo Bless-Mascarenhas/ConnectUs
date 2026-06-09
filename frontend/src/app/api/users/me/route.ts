@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) return NextResponse.json({ error: "user not found" }, { status: 404 });
 
-    const convos = await prisma.conversation.findMany({ select: { unread: true } });
+    const convos = await prisma.conversation.findMany({ where: { userId }, select: { unread: true } });
     const unreadCount = convos.reduce((acc, c) => acc + c.unread, 0);
     
     const stats = user.stats as { connections: number; pending: number; events: number; unread: number };
