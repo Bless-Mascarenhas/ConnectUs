@@ -44,40 +44,9 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Redirect to onboarding if logged in but not completed
-  if (user && !isOnboardingRoute && !isAuthRoute && !path.startsWith("/api")) {
-    const onboardingCookie = request.cookies.get("onboarding_complete");
-    if (onboardingCookie?.value !== "true") {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        const headers: Record<string, string> = { 
-          cookie: request.headers.get("cookie") || "" 
-        };
-        if (session?.access_token) {
-          headers.Authorization = `Bearer ${session.access_token}`;
-        }
-
-        const res = await fetch(`${request.nextUrl.origin}/api/users/me/onboarding-status`, {
-          headers,
-        });
-        if (res.ok) {
-          const { onboardingComplete } = await res.json();
-          if (!onboardingComplete) {
-            const url = request.nextUrl.clone();
-            url.pathname = "/onboarding";
-            return NextResponse.redirect(url);
-          }
-          // Cache the completed status
-          supabaseResponse.cookies.set("onboarding_complete", "true", {
-            path: "/",
-            maxAge: 60 * 60 * 24 * 365,
-          });
-        }
-      } catch (err) {
-        console.error("Onboarding check error:", err);
-      }
-    }
-  }
+  // Onboarding redirect has been moved to the (main)/layout.tsx Server Component 
+  // because making a local fetch request inside Edge Middleware is extremely flaky 
+  // and often silently fails in Vercel/Node edge environments.
 
   return supabaseResponse;
 }
