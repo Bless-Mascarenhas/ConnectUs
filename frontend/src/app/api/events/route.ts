@@ -50,6 +50,32 @@ export async function POST(req: NextRequest) {
   const startDate = new Date(date);
   const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
 
+  // Quick fix: Since the DB splits User and Alumnus tables, we must ensure 
+  // the user exists in Alumnus to satisfy the foreign key constraint.
+  await prisma.alumnus.upsert({
+    where: { id: userId },
+    update: {},
+    create: {
+      id: userId,
+      name: user.name || "Anonymous",
+      avatar: user.avatar || "",
+      coverColor: "#A8C09A",
+      role: "Alumnus",
+      company: "Independent",
+      industry: "Technology",
+      location: location || "Global",
+      gradYear: user.gradYear || new Date().getFullYear(),
+      major: user.major || "Unknown",
+      university: user.university || "Unknown",
+      bio: user.bio || "",
+      expertise: user.interests || [],
+      workHistory: user.experience || [],
+      education: [],
+      available: true,
+      online: true,
+    }
+  });
+
   const event = await prisma.event.create({
     data: {
       id: "e" + Date.now(),
