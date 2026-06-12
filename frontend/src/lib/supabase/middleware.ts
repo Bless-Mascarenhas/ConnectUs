@@ -32,15 +32,15 @@ export async function updateSession(request: NextRequest) {
     path.startsWith("/login") || path.startsWith("/signup") || path.startsWith("/auth");
   const isOnboardingRoute = path.startsWith("/onboarding");
 
-  if (!user && !isAuthRoute && !path.startsWith("/api")) {
+  if (!user && !isAuthRoute && path !== "/" && !path.startsWith("/api")) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
-  if (user && (path === "/login" || path === "/signup")) {
+  if (user && (path === "/login" || path === "/signup" || path === "/")) {
     const url = request.nextUrl.clone();
-    url.pathname = "/";
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 

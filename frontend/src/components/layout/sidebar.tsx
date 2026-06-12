@@ -16,7 +16,7 @@ import { cn, EASE } from "@/lib/utils";
 import { useCommandPalette } from "@/components/features/command-palette";
 
 const PRIMARY = [
-  { href: "/", icon: LayoutGrid, label: "Dashboard" },
+  { href: "/dashboard", icon: LayoutGrid, label: "Dashboard" },
   { href: "/alumni", icon: Users, label: "Alumni" },
   { href: "/messages", icon: MessageSquare, label: "Messages" },
   { href: "/events", icon: Calendar, label: "Events" },
@@ -35,7 +35,7 @@ export function Sidebar() {
   const { open: openPalette } = useCommandPalette();
 
   const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname?.startsWith(href);
+    href === "/dashboard" ? pathname === "/dashboard" : pathname?.startsWith(href);
 
   const NavItem = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => {
     const active = isActive(href);
