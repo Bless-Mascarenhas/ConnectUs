@@ -2,11 +2,37 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { authenticateRequest } from "@/lib/auth";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
+
+// Create a ratelimiter that allows 3 verification attempts per 10 minutes
+let ratelimit: Ratelimit | null = null;
+if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+  ratelimit = new Ratelimit({
+    redis: Redis.fromEnv(),
+    limiter: Ratelimit.slidingWindow(3, "10 m"),
+    analytics: true,
+  });
+}
 
 export async function POST(req: NextRequest) {
   try {
     const userId = await authenticateRequest(req);
     if (!userId) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+    // 1. Rate Limiting Check
+    if (ratelimit) {
+      const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+      const identifier = `verify_${userId}_${ip}`;
+      const { success } = await ratelimit.limit(identifier);
+
+      if (!success) {
+        return NextResponse.json(
+          { status: "rejected", reason: "Too many verification attempts. Please try again in 10 minutes." },
+          { status: 429 } // Too Many Requests
+        );
+      }
+    }
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
