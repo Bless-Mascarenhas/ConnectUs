@@ -67,9 +67,8 @@ export default function EventsPage() {
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`relative h-9 px-3 text-[12px] font-medium rounded-md capitalize transition-colors ${
-                  tab === t ? "text-ink" : "text-muted-foreground hover:text-ink"
-                }`}
+                className={`relative h-9 px-3 text-[12px] font-medium rounded-md capitalize transition-colors ${tab === t ? "text-ink" : "text-muted-foreground hover:text-ink"
+                  }`}
               >
                 {tab === t && (
                   <motion.span
@@ -109,8 +108,8 @@ export default function EventsPage() {
                 {tab === "going"
                   ? "You haven't RSVP'd to any events yet."
                   : tab === "past"
-                  ? "No past events to show."
-                  : "No upcoming events on the calendar."}
+                    ? "No past events to show."
+                    : "No upcoming events on the calendar."}
               </p>
             </CardContent>
           </Card>
@@ -128,9 +127,9 @@ export default function EventsPage() {
           <EventDialog event={active} onClose={() => setActive(null)} onRsvp={toggleRsvp} />
         )}
         {creating && (
-          <CreateEventDialog 
-            onClose={() => setCreating(false)} 
-            onSuccess={(e) => { setEvents((prev) => [...prev, e].sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime())); setCreating(false); }} 
+          <CreateEventDialog
+            onClose={() => setCreating(false)}
+            onSuccess={(e) => { setEvents((prev) => [...prev, e].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())); setCreating(false); }}
           />
         )}
       </AnimatePresence>

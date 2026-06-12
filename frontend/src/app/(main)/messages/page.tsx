@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Send, Phone, Video, MoreHorizontal, ArrowLeft, MessageSquare, Sparkles } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { Avatar } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,10 @@ interface Msg {
   read: boolean;
 }
 
-export default function MessagesPage() {
+function MessagesContent() {
+  const searchParams = useSearchParams();
+  const convoIdParam = searchParams.get("convo");
+
   const [myId, setMyId] = React.useState<string | null>(null);
   const [convos, setConvos] = React.useState<ConversationFull[]>([]);
   const [loading, setLoading] = React.useState(true);
@@ -43,10 +47,20 @@ export default function MessagesPage() {
       .then(([me, cs]) => {
         setMyId(me.id);
         setConvos(cs);
-        if (cs[0]) setActiveId(cs[0].id);
+        if (convoIdParam) {
+          setActiveId(convoIdParam);
+        } else if (cs[0]) {
+          setActiveId(cs[0].id);
+        }
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, []); // Only run on mount, convoIdParam is handled below
+
+  React.useEffect(() => {
+    if (convoIdParam && convos.some((c) => c.id === convoIdParam)) {
+      setActiveId(convoIdParam);
+    }
+  }, [convoIdParam, convos]);
 
   React.useEffect(() => {
     if (!activeId) return;
@@ -377,5 +391,13 @@ function EmptyThread() {
         </p>
       </motion.div>
     </div>
+  );
+}
+
+export default function MessagesPage() {
+  return (
+    <React.Suspense fallback={<div className="flex-1 h-screen bg-canvas" />}>
+      <MessagesContent />
+    </React.Suspense>
   );
 }

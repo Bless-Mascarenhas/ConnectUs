@@ -35,3 +35,39 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function POST(req: NextRequest) {
+  try {
+    const rateLimitRes = await rateLimit(req, "write");
+    if (rateLimitRes) return rateLimitRes;
+
+    const userId = await authenticateRequest(req);
+    if (!userId) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+    const body = await req.json().catch(() => ({}));
+    if (!body.participantId || typeof body.participantId !== "string") {
+      return NextResponse.json({ error: "Invalid participantId" }, { status: 400 });
+    }
+
+    let convo = await prisma.conversation.findFirst({
+      where: { userId, participantId: body.participantId },
+    });
+
+    if (!convo) {
+      convo = await prisma.conversation.create({
+        data: {
+          id: "c" + Date.now() + Math.random().toString(36).substring(7),
+          userId,
+          participantId: body.participantId,
+          lastMessageAt: new Date(),
+          unread: 0,
+        },
+      });
+    }
+
+    return NextResponse.json(convo);
+  } catch (error: any) {
+    console.error(error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}

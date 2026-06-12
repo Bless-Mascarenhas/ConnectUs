@@ -61,6 +61,7 @@ export const reactSchema = z.object({
 
 // ─── PATCH /api/users/me/onboarding ─────────────────────────────────
 export const onboardingStepSchema = z.object({
+  role:               z.enum(["student", "alumni"]).optional(),
   name:               safeString(100).optional(),
   university:         safeString(200).optional(),
   verificationDocUrl: z.string().url().max(500).optional(),

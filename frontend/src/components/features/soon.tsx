@@ -25,7 +25,7 @@ export function SoonScreen({ title, blurb }: { title: string; blurb: string }) {
         <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{blurb}</p>
         <div className="mt-6 flex items-center justify-center gap-2">
           <Button variant="outline" asChild>
-            <Link href="/"><ArrowLeft className="h-4 w-4" />Back to dashboard</Link>
+            <Link href="/dashboard"><ArrowLeft className="h-4 w-4" />Back to dashboard</Link>
           </Button>
           <Button variant="ghost" asChild>
             <Link href="/alumni">Browse alumni →</Link>
