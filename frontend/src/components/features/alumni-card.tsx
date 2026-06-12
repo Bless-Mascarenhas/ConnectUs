@@ -48,7 +48,7 @@ export function AlumniCard({
               {alumnus.role} · <span className="text-ink/70">{alumnus.company}</span>
             </p>
             <p className="mt-0.5 text-[11px] text-muted-foreground">
-              {alumnus.major} · '{String(alumnus.gradYear).slice(2)}
+              {alumnus.major} · &apos;{String(alumnus.gradYear).slice(2)}
             </p>
           </div>
           {variant !== "compact" && (

@@ -470,7 +470,7 @@ export default function ProfilePage() {
                   </p>
                 ) : (
                   <p className="text-[13px] text-accent font-medium">
-                    100% complete! You're looking sharp.
+                    100% complete! You&apos;re looking sharp.
                   </p>
                 )}
                 <div className="mt-4 pt-4 border-t border-line/50">

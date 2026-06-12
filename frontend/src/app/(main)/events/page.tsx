@@ -311,7 +311,7 @@ function EventDialog({
                 onClick={() => onRsvp(event)}
               >
                 {event.going ? (
-                  <><Check className="h-4 w-4" /> You're going</>
+                  <><Check className="h-4 w-4" /> You&apos;re going</>
                 ) : (
                   "RSVP"
                 )}

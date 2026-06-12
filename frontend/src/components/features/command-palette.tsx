@@ -124,7 +124,7 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
                 <div className="max-h-[420px] overflow-y-auto p-1.5">
                   {grouped.length === 0 && (
                     <div className="px-3 py-10 text-center text-sm text-muted-foreground">
-                      No results for "<span className="text-ink">{query}</span>"
+                      No results for &quot;<span className="text-ink">{query}</span>&quot;
                     </div>
                   )}
                   {grouped.map(([group, items]) => (

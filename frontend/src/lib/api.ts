@@ -28,6 +28,16 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
     ...init,
     headers,
   });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  
+  if (!res.ok) {
+    try {
+      const errorData = await res.json();
+      throw new Error(errorData.reason || errorData.error || `${res.status} ${res.statusText}`);
+    } catch (e) {
+      if (e instanceof Error) throw e;
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+  }
+  
   return res.json() as Promise<T>;
 }
