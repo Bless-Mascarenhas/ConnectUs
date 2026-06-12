@@ -374,9 +374,9 @@ GitHub (main branch)
 
 **Status:** Partial (design system and core pages exist)
 
-- [ ] **Public landing page** at `/` for logged-out users — hero, value prop, how it works, CTA to sign up (dashboard moves behind auth)
+- [x] **Public landing page** at `/` for logged-out users — hero, value prop, how it works, CTA to sign up (dashboard moves behind auth)
 - [ ] **Onboarding flow** after signup:
-  - [ ] Step 1: Student or alumni?
+  - [x] Step 1: Student or alumni?
   - [ ] Step 2: Profile basics
   - [ ] Step 3: Connect with 3 recommended people
 - [ ] **Empty states** — illustration + CTA on alumni, messages, events when lists are empty

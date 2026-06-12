@@ -167,7 +167,7 @@ function MessagesContent() {
             </div>
           ) : filtered.length === 0 ? (
             <div className="px-4 py-12 text-center text-[13px] text-muted-foreground">
-              No conversations match "{search}".
+              No conversations match &quot;{search}&quot;.
             </div>
           ) : (
             filtered.map((c, i) => {
@@ -387,7 +387,7 @@ function EmptyThread() {
         </div>
         <h2 className="text-display text-2xl text-ink">Pick a conversation</h2>
         <p className="mt-2 text-[14px] text-muted-foreground">
-          Select someone from the inbox to read the thread, or start a new one from an alumnus's profile.
+          Select someone from the inbox to read the thread, or start a new one from an alumnus&apos;s profile.
         </p>
       </motion.div>
     </div>

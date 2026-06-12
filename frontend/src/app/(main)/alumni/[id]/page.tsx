@@ -120,7 +120,7 @@ export default function AlumnusProfile() {
                 </p>
                 <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-muted-foreground">
                   <span className="inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> {alumnus.location}</span>
-                  <span className="inline-flex items-center gap-1"><GraduationCap className="h-3 w-3" /> {alumnus.university}, '{String(alumnus.gradYear).slice(2)}</span>
+                  <span className="inline-flex items-center gap-1"><GraduationCap className="h-3 w-3" /> {alumnus.university}, &apos;{String(alumnus.gradYear).slice(2)}</span>
 
                 </div>
               </div>
