@@ -372,21 +372,22 @@ GitHub (main branch)
 
 **Goal:** Trustworthy, complete first impression for new visitors.
 
-**Status:** Partial (design system and core pages exist)
+**Status:** Nearly complete
 
 - [x] **Public landing page** at `/` for logged-out users — hero, value prop, how it works, CTA to sign up (dashboard moves behind auth)
+- [x] **Landing page polish** — stats banner, features grid, how-it-works section, CTA banner, branded footer
 - [ ] **Onboarding flow** after signup:
   - [x] Step 1: Student or alumni?
-  - [ ] Step 2: Profile basics
+  - [x] Step 2: Profile basics (bio, education, interests, username, avatar)
   - [ ] Step 3: Connect with 3 recommended people
 - [ ] **Empty states** — illustration + CTA on alumni, messages, events when lists are empty
-- [ ] **Mobile responsiveness** — sidebar hamburger/drawer at ≤768px; test every page at 375px
-- [ ] **SEO metadata** — `metadata` export on every `page.tsx`; `og:image`, `og:title`, `twitter:card`
-- [ ] **Favicon + PWA manifest** — `app/icon.png`, `app/manifest.json`
+- [x] **Mobile responsiveness** — sidebar hamburger/drawer at ≤768px; tested at 375px
+- [x] **SEO metadata** — `metadata` export on every page via layout files; `og:title`, `twitter:card`, title template
+- [x] **Favicon** — `app/icon.svg` with ConnectUs logo
 - [ ] **Legal pages** — Terms of Service + Privacy Policy (e.g. Termly) before real users
-- [ ] **Error pages** — `app/not-found.tsx` (404), `app/error.tsx` (500)
+- [x] **Error pages** — `app/not-found.tsx` (404), `app/error.tsx` (500)
 - [ ] **Cookie consent** — if you expect EU users (GDPR)
-- [ ] **`robots.txt` + sitemap** — `app/robots.ts`, `app/sitemap.ts`
+- [x] **`robots.txt` + sitemap** — `app/robots.ts`, `app/sitemap.ts`
 
 **Done when:** A first-time visitor on mobile can understand the product, sign up, and complete onboarding without hitting a blank or broken screen.
 
