@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
@@ -17,8 +17,44 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "ConnectUs — Alumni × Students",
-  description: "A quietly powerful network for alumni and current students.",
+  title: {
+    default: "ConnectUs — Where Students Meet Their Future",
+    template: "%s | ConnectUs",
+  },
+  description:
+    "ConnectUs bridges the gap between current students and successful alumni. Verified profiles, direct messaging, exclusive events — all in one beautifully simple platform.",
+  metadataBase: new URL("https://connectus.vercel.app"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://connectus.vercel.app",
+    siteName: "ConnectUs",
+    title: "ConnectUs — Where Students Meet Their Future",
+    description:
+      "A verified alumni–student network with real-time messaging, events, and mentorship.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ConnectUs — Where Students Meet Their Future",
+    description:
+      "A verified alumni–student network with real-time messaging, events, and mentorship.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: "/icon.svg",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAFAF9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
+  ],
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
