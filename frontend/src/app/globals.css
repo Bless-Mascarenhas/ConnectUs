@@ -91,4 +91,31 @@
   .glass {
     @apply bg-surface/70 backdrop-blur-xl border border-line/70;
   }
+
+  /* ── Wisprflow-inspired landing utilities ── */
+  .nav-float {
+    @apply fixed top-4 left-1/2 -translate-x-1/2 z-50
+           bg-surface/80 backdrop-blur-2xl
+           border border-line/50 rounded-full
+           px-2 py-1.5 shadow-[0_2px_20px_-4px_hsl(var(--ink)/0.08)];
+  }
+  .section-pad {
+    @apply py-24 lg:py-36 px-6;
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent
+           bg-gradient-to-r from-[#00D4AE] via-[#0C6E8C] to-[#1A4C6E];
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--line) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--line) / 0.3) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-[0_16px_48px_-12px_hsl(var(--ink)/0.12)] border-[#00D4AE]/30;
+  }
 }
